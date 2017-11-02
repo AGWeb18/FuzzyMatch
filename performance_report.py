@@ -55,19 +55,19 @@ print(name_performance_key)
 #performance_name = name_performance_key["Clean Name"]
 
 #  Append these two dataframes, keep their index's
-#df_master = comp_performance_key.append(course_tracking_data)
+df_master = comp_performance_key.append(course_tracking_data)
 #df_master = df_master.dropna()
-#df_master = df_master.sort_values("Clean Name", ascending=True)
+df_master = df_master.sort_values("Clean Name", ascending=True)
 
 
-print(comp_key)
-
+df_master["Match"] = ""
 
 for x in df_master["Clean Name"]:
-    if comp_key.isin([x]) & name_performance_key.isin([x]):
-        print("true")
+    if [comp_key.isin([x]) & name_performance_key.isin([x])]:
+        df_master["Match"] = "Match Found"
+        
 #df_master["Match"] = ["Both Found" if comp_key.isin([x]) and name_performance_key["Clean Name"].isin([x]) else '' for x in df_master["Clean Name"]]
 
-#print(df_master.head())
-#df_master.to_csv(r"C:\Users\DrSynapse\Downloads\RiddingSolutions - CooperTires\working_copy_Oct29_v2.csv")
+
+df_master.to_csv(r"C:\Users\DrSynapse\Downloads\RiddingSolutions - CooperTires\working_copy_Oct29_v3.csv")
 
