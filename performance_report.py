@@ -25,8 +25,9 @@ name_series = pd.Series(normalize_l)
 
 #  Find and replace all non-alphanumeric with nothing
 name_performance_key = name_series.str.replace(r"\W+","")
+name_performance_key = name_performance_key.str.lower()
 comp_performance_key["Clean Name"] = name_performance_key
-comp_performance_key["Clean Name"] = comp_performance_key["Clean Name"].shift(1)
+#comp_performance_key["Clean Name"] = comp_performance_key["Clean Name"].shift(1)
 comp_performance_key["Report"] = "Performance"
 comp_performance_key = comp_performance_key[["DealerName","Clean Name","Report"]]
 
@@ -59,15 +60,6 @@ df_master = comp_performance_key.append(course_tracking_data)
 #df_master = df_master.dropna()
 df_master = df_master.sort_values("Clean Name", ascending=True)
 
-
-df_master["Match"] = ""
-
-for x in df_master["Clean Name"]:
-    if [comp_key.isin([x]) & name_performance_key.isin([x])]:
-        df_master["Match"] = "Match Found"
-        
-#df_master["Match"] = ["Both Found" if comp_key.isin([x]) and name_performance_key["Clean Name"].isin([x]) else '' for x in df_master["Clean Name"]]
-
-
-df_master.to_csv(r"C:\Users\DrSynapse\Downloads\RiddingSolutions - CooperTires\working_copy_Oct29_v3.csv")
-
+#df_master.to_csv(r"C:\Users\DrSynapse\Downloads\RiddingSolutions - CooperTires\working_copy_Oct29_v3.csv")
+course_tracking_data.to_csv(r"C:\Users\DrSynapse\Downloads\RiddingSolutions - CooperTires\course_data_Nov11.csv")
+comp_performance_key.to_csv(r"C:\Users\DrSynapse\Downloads\RiddingSolutions - CooperTires\Performance_data_Nov11.csv")
